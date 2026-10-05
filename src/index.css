@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --paper: #FAFAF7;
+    --cream: #F3F1EA;
+    --ink: #16150F;
+    --ink-2: #44413A;
+    --ink-3: #7A7468;
+    --line: #E3DFD3;
+    --line-dark: #2E2C25;
+    --signal: #1F3DFF;
+    --signal-tint: #E8EBFF;
+
+    --background: 60 14% 97%;
+    --foreground: 48 13% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 48 13% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 48 13% 7%;
+    --primary-foreground: 60 14% 97%;
+    --secondary: 48 12% 93%;
+    --secondary-foreground: 48 13% 7%;
+    --muted: 48 12% 93%;
+    --muted-foreground: 45 7% 44%;
+    --accent: 48 12% 93%;
+    --accent-foreground: 48 13% 7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 46 14% 86%;
+    --input: 46 14% 86%;
+    --ring: 231 100% 56%;
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  ::selection {
+    background: var(--signal);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Fraunces', 'Songti SC', Georgia, serif;
+    font-optical-sizing: auto;
+  }
+  .font-mono-lab {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+  /* mono eyebrow label */
+  .eyebrow {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* technical corner brackets */
+  .brackets {
+    position: relative;
+  }
+  .brackets::before,
+  .brackets::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: var(--ink);
+    border-style: solid;
+  }
+  .brackets::before {
+    top: -1px;
+    left: -1px;
+    border-width: 1px 0 0 1px;
+  }
+  .brackets::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 1px 1px 0;
+  }
+  .brackets-inner::before,
+  .brackets-inner::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: var(--ink);
+    border-style: solid;
+  }
+  .brackets-inner::before {
+    top: -1px;
+    right: -1px;
+    border-width: 1px 1px 0 0;
+  }
+  .brackets-inner::after {
+    bottom: -1px;
+    left: -1px;
+    border-width: 0 0 1px 1px;
+  }
+
+  /* scroll reveal */
+  .reveal {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(14px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+
+  /* blueprint grid backdrop */
+  .grid-paper {
+    background-image:
+      linear-gradient(to right, rgba(22, 21, 15, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(22, 21, 15, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+  .grid-paper-dark {
+    background-image:
+      linear-gradient(to right, rgba(250, 250, 247, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(250, 250, 247, 0.05) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+}
+
+/* workflow apparatus */
+@keyframes dl-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+@keyframes dl-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+.dl-panel {
+  animation: dl-panel-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-panel {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
